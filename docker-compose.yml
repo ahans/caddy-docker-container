@@ -1,0 +1,59 @@
+version: "3"
+services:
+  caddy:
+    image: caddy
+    restart: always
+    ports:
+      - 443:443
+      - 80:80
+    volumes:
+      - ./config/Caddyfile:/etc/caddy/Caddyfile
+      - caddydata:/data
+
+  web1:
+    image: nginx
+    restart: always
+    volumes:
+      - ./www/web1:/usr/share/nginx/html
+
+  web2:
+    image: dragas/thttpd
+    restart: always
+    volumes:
+      - ./www/web2:/var/www/http
+
+  sftpgo:
+    image: drakkan/sftpgo
+    restart: always
+    ports:
+      - 2222:2022
+    volumes:
+      - sftpgodata:/srv/sftpgo
+
+  wordpress:
+    image: wordpress
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_USER: exampleuser
+      WORDPRESS_DB_PASSWORD: examplepass
+      WORDPRESS_DB_NAME: exampledb
+    volumes:
+      - wordpress:/var/www/html
+
+  mysql:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: exampledb
+      MYSQL_USER: exampleuser
+      MYSQL_PASSWORD: examplepass
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - mysqldata:/var/lib/mysql
+
+volumes:
+  wordpress: {}
+  mysqldata: {}
+  sftpgodata: {}
+  caddydata: {}
