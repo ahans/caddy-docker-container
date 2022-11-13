@@ -6,6 +6,10 @@ web2.example.com {
     reverse_proxy web2:80
 }
 
+sftp.example.com {
+    reverse_proxy sftpgo:8080
+}
+
 wordpress.example.com {
     reverse_proxy wordpress:80
 }
