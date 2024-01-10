@@ -12,7 +12,7 @@ the other thttpd, different ones just to show that this is easily possible).
 The static content is placed under `www` and made available via `sftp` through
 an instance of [sftpgo](https://github.com/drakkan/sftpgo). sftpgo's SSH
 port is exposed at 2222, while its web interface is handled by Caddy. There
-is also a [Wordpress[(https://hub.docker.com/_/wordpress) container as an
+is also a [Wordpress](https://hub.docker.com/_/wordpress) container as an
 example of something a bit more complicated.
 
 
